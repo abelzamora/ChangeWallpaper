@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, ChangeWallpaperActivity!</string>
+    <string name="app_name">ChangeWallpaper</string>
+    <string-array name="menu_princial">
+        <item>Activar Wallpaper</item>
+        <item>Seleccionar fondos</item>
+        <item>Obtener más fondos</item>
+    </string-array>
+
+</resources>
