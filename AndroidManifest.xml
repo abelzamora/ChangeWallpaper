@@ -6,6 +6,7 @@
 
     <uses-sdk android:minSdkVersion="7" />
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.SET_WALLPAPER"></uses-permission>
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
@@ -21,13 +22,7 @@
         </activity>
         <activity android:name="abel.wallpaper.menu.WallpaperMenu" android:label="Menu"></activity>
         <activity android:name="abel.wallpaper.menu.WallpaperSelectOrigin" android:label="Obtener Wallpaper"></activity>
-        <activity android:name="abel.wallpaper.menu.WallpaperSelect" android:label="Selección wallpaper">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            
-        </activity>
+        <activity android:name="abel.wallpaper.menu.WallpaperSelect" android:label="Selección wallpaper"> </activity>
     </application>
 
 </manifest>
