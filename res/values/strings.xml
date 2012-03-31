@@ -8,5 +8,10 @@
         <item>Seleccionar fondos</item>
         <item>Obtener más fondos</item>
     </string-array>
+    <string-array name="origin_wallpaper">
+        <item>Desde memoria</item>
+        <item>Desde servidor</item>
+        
+    </string-array>
 
 </resources>
