@@ -11,9 +11,13 @@ public class ChangeWallpaperStart extends BroadcastReceiver {
 
 		// Accion a realizar al inicir el móvil
 		// aqui llama a la clase que comienza la app
-		Intent i = new Intent(context, ChangeWallpaperDaemon.class);
-		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(i);
+		if(Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+			// do your thing here
+			Intent i = new Intent(context, ChangeWallpaperDaemon.class);
+			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(i);
+			}
+		
 	}
 
 }

@@ -1,7 +1,9 @@
 package abel.wallpaper.menu;
 
 import abel.wallpaper.change.R;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -42,7 +44,7 @@ public class WallpaperMenu extends ListActivity {
 		{
 		case 0:
 			//Mostramos ventana emergente, para Activar/Desactivar wallpaper
-			
+			startActivity(new Intent(WallpaperMenu.this, WallpaperActive.class));
 			break;
 			
 		case 1:
@@ -60,5 +62,22 @@ public class WallpaperMenu extends ListActivity {
 				
 		}
 		
+	}
+	
+	/*
+	 * RadioButtons para activar desactivar cambiador
+	 * 
+	 */
+	private void activeUnactive(){
+		final CharSequence[] items = {"Red", "Green", "Blue"};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Pick a color");
+		builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int item) {
+		        Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
+		    }
+		});
+		AlertDialog alert = builder.create();
 	}
 }
