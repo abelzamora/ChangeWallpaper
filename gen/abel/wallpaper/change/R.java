@@ -27,9 +27,10 @@ public final class R {
         public static final int uax=0x7f020009;
     }
     public static final class id {
-        public static final int LinearLayout01=0x7f060001;
-        public static final int TextView01=0x7f060002;
-        public static final int gallery=0x7f060000;
+        public static final int LinearLayout01=0x7f060002;
+        public static final int TextView01=0x7f060003;
+        public static final int gallery=0x7f060001;
+        public static final int imagenBoton=0x7f060000;
     }
     public static final class layout {
         public static final int list_item=0x7f030000;
