@@ -49,7 +49,7 @@ public class WallpaperMenu extends ListActivity {
 			
 		case 1:
 			//Redirige al menu para obtener más wallpapers
-			startActivity(new Intent(WallpaperMenu.this, WallpaperSelect.class));
+			startActivity(new Intent(WallpaperMenu.this, WallpaperList.class));
 			break;
 		
 		case 2:

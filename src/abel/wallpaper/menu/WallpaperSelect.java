@@ -1,8 +1,6 @@
 package abel.wallpaper.menu;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import abel.wallpaper.change.R;
 import android.app.Activity;
@@ -10,7 +8,6 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +22,6 @@ import android.widget.Toast;
 public class WallpaperSelect extends Activity {
 	private WallpaperManager miGestorDeFondos;
 	private Gallery gallery;
-	private String imageHttpAddress = "http://jonsegador.com/wp-content/apezz.png";
-	private Bitmap loadedImage;
 	private ImageButton iButton;
 
 	@Override
@@ -98,20 +93,6 @@ public class WallpaperSelect extends Activity {
 			iButton.setBackgroundResource(mImageIds[position]);
 		}
 
-		private void downloadFile(String imageHttpAddress, ImageView imageView) {
-			URL imageUrl = null;
-			try {
-				imageView = (ImageView) findViewById(R.drawable.sample_7);
-				imageUrl = new URL(imageHttpAddress);
-				HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-				conn.connect();
-				loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-				imageView.setImageBitmap(loadedImage);
-			} catch (IOException e) {
-				Toast.makeText(getApplicationContext(), "Error cargando la imagen: " + e.getMessage(), Toast.LENGTH_LONG).show();
-				e.printStackTrace();
-			}
-		}
 	}
 
 }

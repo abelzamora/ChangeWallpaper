@@ -8,7 +8,7 @@
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 	<uses-permission android:name="android.permission.SET_WALLPAPER"/>
 	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
@@ -37,6 +37,7 @@
             </intent-filter>
         </service>
         <activity android:name="abel.wallpaper.menu.WallpaperActive"></activity>
+        <activity android:name="abel.wallpaper.menu.WallpaperList"></activity>
     </application>
 
 </manifest>
