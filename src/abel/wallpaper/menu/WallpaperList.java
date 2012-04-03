@@ -1,7 +1,8 @@
 package abel.wallpaper.menu;
 
-import abel.wallpaper.change.ChangeWallpaperGlobales;
 import abel.wallpaper.change.R;
+import abel.wallpaper.global.WallpaperDataName;
+import abel.wallpaper.global.WallpaperGlobales;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +17,9 @@ public class WallpaperList<E> extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ChangeWallpaperGlobales<E> cwg = new ChangeWallpaperGlobales<E>();
+		WallpaperGlobales<WallpaperDataName> cwg = new WallpaperGlobales<WallpaperDataName>();
 		
-		String[] listSdCard = cwg.listFile();
+		final String[] listSdCard = cwg.listFile();
 		setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, listSdCard));
 
 		ListView lv = getListView();
@@ -29,7 +30,10 @@ public class WallpaperList<E> extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 				//Selecciona una opción del menú
-				startActivity(new Intent(WallpaperList.this, WallpaperSelect.class));
+				// Esto para realizar la llamada
+				Intent i=new Intent(WallpaperList.this, WallpaperSelect.class);
+				i.putExtra("paquete", listSdCard[position]);
+				startActivity(i); 
 				
 			}
 		});

@@ -25,13 +25,13 @@
         <activity android:name="abel.wallpaper.menu.WallpaperMenu" android:label="Menu"></activity>
         <activity android:name="abel.wallpaper.menu.WallpaperSelectOrigin" android:label="Obtener Wallpaper"></activity>
         <activity android:name="abel.wallpaper.menu.WallpaperSelect" android:label="Selección wallpaper"> </activity>
-        <receiver android:enabled="true" android:name="ChangeWallpaperStart">
+        <receiver android:enabled="true" android:name=".ChangeWallpaperStart">
             <intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />				
 				<category android:name="android.intent.category.DEFAULT" />
 			</intent-filter>            
         </receiver>
-        <service android:name="ChangeWallpaperDaemon">
+        <service android:name=".ChangeWallpaperDaemon">
             <intent-filter>
                 <action android:name="abel.wallpaper.change.ChangeWallpaperDaemon"/>
             </intent-filter>
