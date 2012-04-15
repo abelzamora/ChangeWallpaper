@@ -35,6 +35,23 @@ public class WallpaperGlobales<E> {
 	}
 
 	/*
+	 * Comprueba si es la hora para realizar el cambio
+	 */
+	public boolean checkTime() {
+		Calendar c = Calendar.getInstance();
+		int hora = c.getTime().getHours();
+
+		switch (hora) {
+			case 6:
+			case 10:
+			case 19:
+				return true;
+			default:
+				return false;
+		}
+	}
+
+	/*
 	 * Comprueba la hora del teléfono móvil
 	 */
 	public Integer checkHour() {
@@ -96,39 +113,35 @@ public class WallpaperGlobales<E> {
 	 */
 	public ArrayList<WallpaperDataName> checkFirstTime() throws IllegalArgumentException, IllegalStateException, IOException {
 		// Primero comprobamos que el directorio exista
-		//WallpaperXml wpx = new WallpaperXml();
-		//wpx.writeXml("S", NOMBRE_FICHERO, "S");
+		// WallpaperXml wpx = new WallpaperXml();
+		// wpx.writeXml("S", NOMBRE_FICHERO, "S");
 		if (!checkDirectory(URI_SD)) {
 			// El directorio no existía, creamos el xml
 			WallpaperXml wpx = new WallpaperXml();
-			wpx.writeXml("S", NOMBRE_FICHERO, "S");
+			wpx.writeXml("S", NOMBRE_FICHERO, "N");
 			return allImages(NOMBRE_FICHERO, NOMBRE_FICHERO);
 		} else {
 			return null;
 		}
 	}
-	
+
 	/*
 	 * Creamos otro paquete en la primera descarga...
 	 */
-	public ArrayList<WallpaperDataName> getMasFondos() throws IOException
-	{
-		if(!checkDirectory("/sdcard/changeWallpaper/puentes"))
-		{
+	public ArrayList<WallpaperDataName> getMasFondos() throws IOException {
+		if (!checkDirectory("/sdcard/changeWallpaper/puentes")) {
 			return allImages("puentes", "puentes");
-		}
-		else{
+		} else {
 			return null;
 		}
 	}
-	
 
 	/*
 	 * Comprobar si existe el directorio, si no existe lo creamos
 	 */
 	private boolean checkDirectory(String uri) {
 		File directory = new File(uri);
-		//directory.delete();
+		// directory.delete();
 		if (!directory.exists()) {
 			// No existe el directorio princial
 			directory.mkdir();

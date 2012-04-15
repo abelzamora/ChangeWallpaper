@@ -4,7 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_weight="1"
-    >  
+    >
+
+    <CheckBox
+        android:id="@+id/ChkPaquete"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Establecer paquete" />
  
     <ImageButton  
         android:id="@+id/imagenBoton" 

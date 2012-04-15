@@ -1,9 +1,7 @@
 package abel.wallpaper.menu;
 
 import abel.wallpaper.change.R;
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +22,6 @@ public class WallpaperMenu extends ListActivity {
 		ListView lv = getListView();
 		lv.setTextFilterEnabled(true);
 		
-
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -45,6 +42,7 @@ public class WallpaperMenu extends ListActivity {
 		case 0:
 			//Mostramos ventana emergente, para Activar/Desactivar wallpaper
 			startActivity(new Intent(WallpaperMenu.this, WallpaperActive.class));
+
 			break;
 			
 		case 1:
@@ -63,5 +61,6 @@ public class WallpaperMenu extends ListActivity {
 		}
 		
 	}
+	
 	
 }

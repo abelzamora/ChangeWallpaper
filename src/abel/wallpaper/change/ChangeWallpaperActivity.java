@@ -17,86 +17,77 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 public class ChangeWallpaperActivity<E> extends Activity {
-
 	private WallpaperManager miGestorDeFondos;
+	private static final String TAG = "ChangeWallpaper";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 
-		/** set time to splash out */
-		final int welcomeScreenDisplay = 3000;
-		/** create a thread to show splash up to splash time */
 		Thread welcomeThread = new Thread() {
-
-			int wait = 0;
-
-			@Override
 			public void run() {
+
 				try {
-					super.run();
-					/**
-					 * use while to get the splash time. Use sleep() to increase
-					 * the wait variable for every 100L.
-					 */
-					/*
-					 * while (wait < welcomeScreenDisplay) { sleep(100); wait +=
-					 * 100; }
-					 */
-				} catch (Exception e) {
-					System.out.println("EXc=" + e);
-				} finally {
-					/**
-					 * Called after splash times up. Do some action after splash
-					 * times up. Here we moved to another main activity class
-					 */
-					try {
+					synchronized (this) {
+						// Clase que contiene todos los parámetros globales
 						WallpaperGlobales<WallpaperDataName> cwg = new WallpaperGlobales<WallpaperDataName>();
-						// Comprobamos que se ha creado el directorio con el
-						// fichero de configuración
 
 						ArrayList<WallpaperDataName> alBm = cwg.checkFirstTime();
 						if (alBm != null) {
 							setAllBitMapSdCard(alBm);
 							// Obtenemos mas fondos en la primera instalación
 							setAllBitMapSdCard(cwg.getMasFondos());
-						}
 
-						// Comprobamos la hora
-						Integer sectionDay = cwg.checkHour();
+							// Comprobamos la hora
+							Integer sectionDay = cwg.checkHour();
 
-						// Cambiamos el fondo de pantalla
-						miGestorDeFondos = WallpaperManager.getInstance(getApplicationContext());
-						@SuppressWarnings("unchecked")
-						// Hay que comprobar que directorio ha seleccionado por
-						// defecto
-						WallpaperDataConfig wdc = new WallpaperXml().getDataConfig();
-						String directorio = wdc.getPaquete();
-						ArrayList<WallpaperDataName> bmRuta = cwg.cambioWallpaper(sectionDay, directorio);
-						// Comprobamos si tiene activado el cambiador automático
-						String activado = wdc.getActivado();
-						if (activado.equals("S")) {
-							//Está activado el cambiador automático
-							Bitmap bm = bmRuta.get(0).getImagen();
-							miGestorDeFondos.setBitmap(bm);
+							// Cambiamos el fondo de pantalla
+							miGestorDeFondos = WallpaperManager.getInstance(getApplicationContext());
+							@SuppressWarnings("unchecked")
+							// Hay que comprobar que directorio ha seleccionado
+							// por
+							// defecto
+							WallpaperDataConfig wdc = new WallpaperXml().getDataConfig();
+							String directorio = wdc.getPaquete();
+							ArrayList<WallpaperDataName> bmRuta = cwg.cambioWallpaper(sectionDay, directorio);
+							// Comprobamos si tiene activado el cambiador
+							// automático
+							String activado = wdc.getActivado();
+							if (activado.equals("S")) {
+								// Está activado el cambiador automático
+								Bitmap bm = bmRuta.get(0).getImagen();
+								bm.prepareToDraw();
+								bm.setDensity(BIND_AUTO_CREATE);
+								miGestorDeFondos.setBitmap(bm);
+							}
+							// Almacenamos el fondo de pantalla en la sdCard
+							setAllBitMapSdCard(bmRuta);
 						}
-						// Almacenamos el fondo de pantalla en la sdCard
-						setAllBitMapSdCard(bmRuta);
-						startActivity(new Intent(ChangeWallpaperActivity.this, WallpaperMenu.class));
-						finish();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.getMessage();
-						this.stop();
 					}
+
+				} catch (Exception e) {
+					// Recogemos todas las excepciones
+					Log.d(TAG, e.getMessage());
+				} finally {
+					finish();
+					// Por ultimo, comenzamos con la apliacion
+					// Arrancamos el timer que comprueba cada 15 minutos si tiene que
+					// cambiar el wallpaper
+					Intent servicio = new Intent();
+					servicio.setAction("abel.wallpaper.change.ChangeWallpaperServicio");
+					startService(servicio);
+
+					startActivity(new Intent(ChangeWallpaperActivity.this, WallpaperMenu.class));
+					stop();
 				}
 			}
 		};
 		welcomeThread.start();
-
+		
 	}
 
 	/*

@@ -12,7 +12,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class WallpaperList<E> extends ListActivity {
+public class WallpaperList<E, T> extends ListActivity {
+	private ArrayAdapter<T> adapter;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -20,10 +21,12 @@ public class WallpaperList<E> extends ListActivity {
 		WallpaperGlobales<WallpaperDataName> cwg = new WallpaperGlobales<WallpaperDataName>();
 		
 		final String[] listSdCard = cwg.listFile();
-		setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, listSdCard));
+		adapter = new WallpaperListAdapter(this, R.layout.list_pqt, listSdCard);
+		setListAdapter(adapter);
 
 		ListView lv = getListView();
 		lv.setTextFilterEnabled(true);
+		
 		
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -37,5 +40,14 @@ public class WallpaperList<E> extends ListActivity {
 				
 			}
 		});
+		
 	}
+	
+	@Override
+	public void onResume()
+	{
+	         super.onResume();
+	         adapter.notifyDataSetChanged();
+	 }
+	
 }

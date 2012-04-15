@@ -17,27 +17,24 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </activity>
         <activity android:name="abel.wallpaper.menu.WallpaperMenu" android:label="Menu"></activity>
         <activity android:name="abel.wallpaper.menu.WallpaperSelectOrigin" android:label="Obtener Wallpaper"></activity>
         <activity android:name="abel.wallpaper.menu.WallpaperSelect" android:label="Selección wallpaper"> </activity>
-        <receiver android:enabled="true" android:name=".ChangeWallpaperStart">
-            <intent-filter>
-				<action android:name="android.intent.action.BOOT_COMPLETED" />				
-				<category android:name="android.intent.category.DEFAULT" />
-			</intent-filter>            
-        </receiver>
-        <service android:name=".ChangeWallpaperDaemon">
-            <intent-filter>
-                <action android:name="abel.wallpaper.change.ChangeWallpaperDaemon"/>
-            </intent-filter>
-        </service>
         <activity android:name="abel.wallpaper.menu.WallpaperActive"></activity>
         <activity android:name="abel.wallpaper.menu.WallpaperList"></activity>
+        <service android:name="ChangeWallpaperServicio">
+            <intent-filter>
+                <action android:name="abel.wallpaper.change.ChangeWallpaperServicio"/>
+            </intent-filter>
+        </service>
+        <receiver android:name="ChangeWallpaperRecibidor">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
